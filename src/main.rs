@@ -1,7 +1,7 @@
 use ferris_says::say;
 use std::io;
 use std::{io::{stdout, BufWriter}};
-use rand::Rng;
+use rand::RngExt;
 use std::cmp::Ordering;
 
 fn main() {
@@ -19,13 +19,13 @@ fn main() {
         let width  = message.chars().count();
     
         let mut writer = BufWriter::new(stdout.lock());
-        say(message.as_bytes(), width, &mut writer).unwrap();
+        say(&message, width, &mut writer).unwrap();
     }
     else {
 
         println!("Guess the number!");
 
-        let secret_number = rand::thread_rng().gen_range(1..101);
+        let secret_number = rand::rng().random_range(1..101);
 
         println!("The secret number is: {}", secret_number);
 
